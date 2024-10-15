@@ -8,14 +8,12 @@ import java.util.Arrays;
 @Entity
 @Table
 public class BlogWriting {
-
     @Id
     @SequenceGenerator(
             name = "blogwriting_sequence",
             sequenceName = "blogwriting_sequence",
             allocationSize = 1
     )
-
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
             generator = "blogwriting_sequence"

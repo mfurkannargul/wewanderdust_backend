@@ -14,15 +14,14 @@ public class UserService {
         return List.of(
                 new User(1,
                         "furkan",
-                        "XXXXXXXXXXXXXXXX",
+                        "furkie@gmail.com",
+                        "123",
+                        "founder",
+                        "hey yo",
                         "",
-                        "",
-                        "XXXXXXXXXXXXXXXX",
-                        "XXXXXXXXXXXXXXXX",
-                        "XXXXXXXXXXXXXXXX",
+                        "ankara",
                         LocalDate.now(),
                         LocalDate.of(2000, 1, 1),
-                        new String[1]));
-
+                        new String[]{""} ));
     }
 }

@@ -1,8 +1,23 @@
 package com.wewanderdust.wewanderdust.user;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
+//@Entity
+//@Table
 public class User {
+//    @Id
+//    @SequenceGenerator(
+//            name = "user_sequence",
+//            sequenceName = "user_sequence",
+//            allocationSize = 1
+//    )
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "user_sequence"
+//    )
+
     private int userId;
     private String name;
     private String email;
