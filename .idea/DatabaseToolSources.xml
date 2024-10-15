@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DatabaseToolSources">
+    <data-source name="wewanderdust@localhost" uuid="45df7bb3-342f-4e72-9e10-bfa53625b501" type="POSTGRES">
+      <base-info connect-type="DB_DEFAULT" product="PostgreSQL" version="17.0 (Postgres.app)" major-version="17" minor-version="0" jdbc-name="PostgreSQL JDBC Driver" jdbc-version="42.6.0" jdbc-major-version="42" jdbc-minor-version="6" />
+      <user-name />
+      <schema-mapping>
+        <introspection-scope>
+          <node negative="1">
+            <node kind="database" qname="postgres" operator="@">
+              <node kind="schema">
+                <name qname="information_schema" />
+                <name qname="pg_catalog" />
+                <name qname="pg_toast" />
+                <name qname="public" />
+              </node>
+            </node>
+            <node kind="database" qname="furkannargul" operator="@">
+              <node kind="schema">
+                <name qname="information_schema" />
+                <name qname="pg_catalog" />
+                <name qname="pg_toast" />
+                <name qname="public" />
+              </node>
+            </node>
+            <node kind="database" qname="wewanderdust" operator="@">
+              <node kind="schema">
+                <name qname="information_schema" />
+                <name qname="pg_catalog" />
+                <name qname="pg_toast" />
+                <name qname="public" />
+              </node>
+            </node>
+          </node>
+        </introspection-scope>
+      </schema-mapping>
+      <choose-schema-mapping>
+        <introspection-scope>
+          <node negative="1">
+            <node kind="database" qname="postgres" operator="@">
+              <node kind="schema">
+                <name qname="public" />
+              </node>
+            </node>
+            <node kind="database" qname="wewanderdust" operator="@">
+              <node kind="schema">
+                <name qname="public" />
+              </node>
+            </node>
+          </node>
+        </introspection-scope>
+      </choose-schema-mapping>
+      <url>jdbc:postgresql://localhost:5432/wewanderdust</url>
+      <remarks />
+      <vm-options />
+      <driver-info id="postgresql" />
+      <ssh-properties enabled="false" />
+      <ssl-config enabled="false">
+        <uuid />
+        <caFile />
+        <clientCertificateFile />
+        <clientKeyFile />
+        <sslMode>REQUIRE</sslMode>
+      </ssl-config>
+    </data-source>
+  </component>
+</project>
