@@ -22,26 +22,26 @@ public class BlogWriting {
     private int blogId;
     private String title;
     private String author;
-    private String content;
     private LocalDate date;
     private String[] tags;
+
+    @Transient
+    private String content;
 
     public BlogWriting() {
     }
 
-    public BlogWriting(int blogId, String title, String author, String content, LocalDate date, String[] tags) {
+    public BlogWriting(int blogId, String title, String author, LocalDate date, String[] tags) {
         this.blogId = blogId;
         this.title = title;
         this.author = author;
-        this.content = content;
         this.date = date;
         this.tags = tags;
     }
 
-    public BlogWriting(String title, String author, String content, LocalDate date, String[] tags) {
+    public BlogWriting(String title, String author, LocalDate date, String[] tags) {
         this.title = title;
         this.author = author;
-        this.content = content;
         this.date = date;
         this.tags = tags;
     }
@@ -71,7 +71,7 @@ public class BlogWriting {
     }
 
     public String getContent() {
-        return content;
+        return "travel";
     }
 
     public void setContent(String content) {

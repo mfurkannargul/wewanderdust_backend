@@ -21,14 +21,12 @@ public class BlogWritingConfig {
             BlogWriting blog1 = new BlogWriting(1,
                     "Seyahat Tutkusu",
                     "furkan",
-                    "travel",
                     LocalDate.of(2024,OCTOBER,10),
                     new String[]{""} );
 
             BlogWriting blog2 = new BlogWriting(2,
                     "Yazma Tutkusu",
                     "furkan",
-                    "writing",
                     LocalDate.of(2024,OCTOBER,15),
                     new String[]{""} );
 

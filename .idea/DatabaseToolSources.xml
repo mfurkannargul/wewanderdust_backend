@@ -50,6 +50,11 @@
           </node>
         </introspection-scope>
       </choose-schema-mapping>
+      <use-database negative="1" kind="database" qname="wewanderdust" operator="@">
+        <node kind="schema">
+          <name qname="public" />
+        </node>
+      </use-database>
       <url>jdbc:postgresql://localhost:5432/wewanderdust</url>
       <remarks />
       <vm-options />
