@@ -1,12 +1,17 @@
 package com.wewanderdust.wewanderdust.repository;
 
 import com.wewanderdust.wewanderdust.entity.Comment;
+import com.wewanderdust.wewanderdust.entity.Guide;
+import com.wewanderdust.wewanderdust.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
-    List<Comment> findByGuideId(Long guideId);
+
+    // Find all Comments for a specific Guide
+    List<Comment> findByGuide(Guide guide);
+
+    // Find all Comments by a specific User
+    List<Comment> findByUser(User user);
 }
