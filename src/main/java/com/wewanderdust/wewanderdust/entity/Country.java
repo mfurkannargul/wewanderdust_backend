@@ -1,6 +1,5 @@
 package com.wewanderdust.wewanderdust.entity;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
