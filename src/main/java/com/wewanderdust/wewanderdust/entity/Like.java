@@ -26,7 +26,7 @@ public class Like {
     @JoinColumn(name = "guide_id", nullable = false)
     private Guide guide;
 
-    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 }
 

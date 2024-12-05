@@ -1,9 +1,12 @@
 package com.wewanderdust.wewanderdust.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.util.Date;
 
@@ -18,6 +21,8 @@ public class Guide {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Title is mandatory")
+    @Size(max = 255, message = "Title must not exceed 255 characters")
     @Column(nullable = false)
     private String title;
 
@@ -60,8 +65,8 @@ public class Guide {
     @JoinColumn(name = "created_by", nullable = true)
     private User createdBy;
 
+    @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, updatable = false)
-    private Date createdAt = new Date();
-
+    private Date createdAt;
 }

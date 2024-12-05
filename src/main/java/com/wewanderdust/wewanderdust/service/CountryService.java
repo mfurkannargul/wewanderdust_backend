@@ -18,4 +18,5 @@ public class CountryService {
     public List<Country> getAllCountries() {
         return countryRepository.findAll();
     }
+
 }

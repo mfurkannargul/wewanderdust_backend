@@ -89,7 +89,6 @@
 			<artifactId>jakarta.validation-api</artifactId>
 			<version>3.0.0</version> <!-- Or the latest version -->
 		</dependency>
-
 	</dependencies>
 
 	<build>
