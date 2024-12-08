@@ -1,60 +1,61 @@
 package com.wewanderdust.wewanderdust.config;
 
-import com.wewanderdust.wewanderdust.security.JwtAuthenticationFilter;
-import com.wewanderdust.wewanderdust.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
+    private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+    public SecurityConfig(
+            JwtAuthenticationFilter jwtAuthenticationFilter,
+            AuthenticationProvider authenticationProvider
+    ) {
+        this.authenticationProvider = authenticationProvider;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf.disable()) // disable CSRF protection
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/login", "/register", "/api/countries").permitAll() // Allow access to login and register // TODO: countries i kaldir
-                        .anyRequest().authenticated() // All other requests must be authenticated
-                )
-                .csrf(csrf -> csrf
-                        .requireCsrfProtectionMatcher(request -> false)) // Disable CSRF protection for stateless authentication (CSRF disabled because JWT provides stateless security)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter before the UsernamePasswordAuthenticationFilter
+                        .requestMatchers("/auth/**").permitAll() // allow access to /auth/**
+                        .requestMatchers("/users/all").permitAll() // allow access without authentication
+                        .anyRequest().authenticated()) // require authentication for all other requests
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // stateless session management
+                .authenticationProvider(authenticationProvider) // use custom authentication provider
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // add custom JWT filter before the default one
 
-        return http.build(); // Build the security filter chain
+        return http.build();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(
-            HttpSecurity http,
-            PasswordEncoder passwordEncoder,
-            UserService userService) throws Exception {
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
 
-        AuthenticationManagerBuilder authBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        configuration.setAllowedOrigins(List.of("http://localhost:8080"));
+        configuration.setAllowedMethods(List.of("GET","POST"));
+        configuration.setAllowedHeaders(List.of("Authorization","Content-Type"));
 
-        authBuilder
-                .userDetailsService(userService)
-                .passwordEncoder(passwordEncoder);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
-        return authBuilder.build();
-    }
+        source.registerCorsConfiguration("/**",configuration);
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // Use BCrypt for password encoding
+        return source;
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/likes")
+@RequestMapping("/likes")
 public class LikeController {
 
     private final LikeService likeService;

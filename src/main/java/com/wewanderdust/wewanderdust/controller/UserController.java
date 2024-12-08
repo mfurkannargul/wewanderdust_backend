@@ -1,48 +1,38 @@
 package com.wewanderdust.wewanderdust.controller;
 
 import com.wewanderdust.wewanderdust.entity.User;
-import com.wewanderdust.wewanderdust.security.JwtUtil;
 import com.wewanderdust.wewanderdust.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
+import java.util.List;
 
+@RequestMapping("/users")
 @RestController
-@RequestMapping("/api/users")
 public class UserController {
-
-    private final AuthenticationManager authenticationManager;
-    private final JwtUtil jwtUtil;
     private final UserService userService;
 
-    public UserController(AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserService userService) {
-        this.authenticationManager = authenticationManager;
-        this.jwtUtil = jwtUtil;
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody User user) {
-        if (userService.findByUsername(user.getUsername()).isPresent()) {
-            return ResponseEntity.badRequest().body("Username is already taken");
-        }
-        User savedUser = userService.registerUser(user);
-        return ResponseEntity.ok(savedUser);
+    @GetMapping("/me")
+    public ResponseEntity<User> authenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        User currentUser = (User) authentication.getPrincipal();
+
+        return ResponseEntity.ok(currentUser);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@RequestBody User user) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPasswordHash())
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+    @GetMapping("/all")
+    public ResponseEntity<List<User>> allUsers() {
+        List <User> users = userService.allUsers();
 
-        String token = jwtUtil.generateToken(user.getUsername());
-        return ResponseEntity.ok("Bearer " + token);
+        return ResponseEntity.ok(users);
     }
 }
