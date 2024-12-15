@@ -43,10 +43,10 @@ public class DataInitializer {
             Country scotland = new Country();
             scotland.setName("İskoçya");
 
-            Country egypt = new Country();
-            egypt.setName("Mısır");
+            Country india = new Country();
+            india.setName("Hindistan");
 
-//            countryRepository.save(egypt);
+            countryRepository.save(india);
 
             // Add sample cities
             City edinburgh = new City();
