@@ -35,6 +35,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/auth/**").permitAll() // allow access to /auth/**
                         .requestMatchers("/users/all").permitAll() // allow access without authentication
+                        .requestMatchers("/health").permitAll() // allow access without authentication
                         .anyRequest().authenticated()) // require authentication for all other requests
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // stateless session management
