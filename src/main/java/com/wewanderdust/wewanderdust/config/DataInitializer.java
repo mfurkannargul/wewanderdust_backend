@@ -37,41 +37,41 @@ public class DataInitializer {
 //                userService.registerUser(user);
 //            }
 
-            Country turkey = new Country();
-            turkey.setName("Türkiye");
-
-            Country scotland = new Country();
-            scotland.setName("İskoçya");
-
-            Country india = new Country();
-            india.setName("Hindistan");
-
-            countryRepository.save(india);
-
-            // Add sample cities
-            City edinburgh = new City();
-            edinburgh.setName("Edinburgh");
-            edinburgh.setCountry(scotland);
-
-            City istanbul = new City();
-            istanbul.setName("Istanbul");
-            istanbul.setCountry(turkey);
-
-//            cityRepository.saveAll(
-//                    List.of(istanbul, edinburgh));
-
-            Guide istanbulGuide = new Guide();
-            istanbulGuide.setTitle("Istanbul Seyahat Rehberi");
-            istanbulGuide.setCountry(turkey);
-            istanbulGuide.setCity(istanbul);
-
-            Guide edinburghGuide = new Guide();
-            edinburghGuide.setTitle("Edinburgh Seyahat Rehberi");
-            edinburghGuide.setCountry(scotland);
-            edinburghGuide.setCity(edinburgh);
-
-//            guideRepository.saveAll(
-//                    List.of(istanbulGuide, edinburghGuide));
+//            Country turkey = new Country();
+//            turkey.setName("Türkiye");
+//
+//            Country scotland = new Country();
+//            scotland.setName("İskoçya");
+//
+//            Country india = new Country();
+//            india.setName("Hindistan");
+//
+//            countryRepository.save(india);
+//
+//            // Add sample cities
+//            City edinburgh = new City();
+//            edinburgh.setName("Edinburgh");
+//            edinburgh.setCountry(scotland);
+//
+//            City istanbul = new City();
+//            istanbul.setName("Istanbul");
+//            istanbul.setCountry(turkey);
+//
+////            cityRepository.saveAll(
+////                    List.of(istanbul, edinburgh));
+//
+//            Guide istanbulGuide = new Guide();
+//            istanbulGuide.setTitle("Istanbul Seyahat Rehberi");
+//            istanbulGuide.setCountry(turkey);
+//            istanbulGuide.setCity(istanbul);
+//
+//            Guide edinburghGuide = new Guide();
+//            edinburghGuide.setTitle("Edinburgh Seyahat Rehberi");
+//            edinburghGuide.setCountry(scotland);
+//            edinburghGuide.setCity(edinburgh);
+//
+////            guideRepository.saveAll(
+////                    List.of(istanbulGuide, edinburghGuide));
         };
     }
 }
